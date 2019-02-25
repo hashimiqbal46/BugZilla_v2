@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1><b>Bugs</b></h1>
+<table class="table ">
+  <thead class="thead-dark">
+    <tr>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Deadline</th>
+      <th>Screenshot</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bugs.each do |bug| %>
+      <tr>
+        <td><%=bug.title %></td>
+        <td><%=bug.bug_type %></td>
+        <td><%=bug.status %></td>
+        <td><%=bug.deadline %></td>
+        <td><%= bug.screenshot %></td>
+        <td><%= link_to 'Edit', edit_project_bug_path(bug.project.id, bug.id) %></td>
+        <td><%= link_to 'Destroy', project_bug_path(bug.project.id, bug.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to button_tag('New Bug'), new_project_bug_path %>
+<%= link_to button_tag('Back'),projects_path %>

@@ -9,3 +9,8 @@
 
 	User.create(email: "hashim.iqbal@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Hashim Iqbal")
 	User.create(email: "hashimrajput13@devsinc.com", password: "hashimiqbal", user_type: "manager", name: "Hashim")
+
+
+	Project.create(title: "first Project", content: "This is my first Project")
+
+	Project.first.bugs.create(title: "Feature Bug",bug_type: "Bug",status: "new",user_id: 1)
