@@ -11,7 +11,7 @@ class BugsController < ApplicationController
   # GET /bugs/1
   # GET /bugs/1.json
   def show
-    
+    authorize @bug
   end
 
   # GET /bugs/new
@@ -21,13 +21,14 @@ class BugsController < ApplicationController
 
   # GET /bugs/1/edit
   def edit
+    authorize @bug
   end
 
   # POST /bugs
   # POST /bugs.json
   def create
     @bug = Project.find(params[:project_id]).bugs.new(bug_params)
-
+    authorize @bug
     if @bug.save
       redirect_to projects_path, notice: 'Bug was successfully created.'
         
@@ -50,6 +51,7 @@ class BugsController < ApplicationController
   # DELETE /bugs/1
   # DELETE /bugs/1.json
   def destroy
+    authorize @bug
     @bug.destroy
     redirect_to projects_path, notice: 'Bug was successfully destroyed.'
   end

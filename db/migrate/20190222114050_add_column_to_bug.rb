@@ -4,6 +4,6 @@ class AddColumnToBug < ActiveRecord::Migration[5.2]
     add_column :bugs, :deadline, :date
     add_column :bugs, :bug_type, :string
     add_column :bugs, :status, :string
-    add_column :bugs, :screenshot, :binary, :limit => 10.megabyte
+    add_column :bugs, :image, :string
   end
 end

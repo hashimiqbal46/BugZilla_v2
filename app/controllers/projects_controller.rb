@@ -4,29 +4,43 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all.paginate(page: params[:page], per_page: 1)
+    if current_user.user_type == "qa"
+      @projects = Project.all.paginate(page: params[:page], per_page: 1)
+    else
+      @projects = current_user.projects.paginate(page: params[:page], per_page: 1)
+    end
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
+    authorize @project
   end
 
   # GET /projects/new
   def new
-    @project = Project.new
+    @project = current_user.projects.new
   end
 
   # GET /projects/1/edit
   def edit
+    authorize @project
   end
 
   # POST /projects
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    puts "----" * 123
+    puts @project.inspect
+    puts "=-----=" * 100
+    authorize @project
     respond_to do |format|
       if @project.save
+        ProjectsUser.create(project_id: @project.id, user_id: current_user.id)
+        puts "--111--" * 123
+        puts @project.inspect
+        puts "=---1111--=" * 100
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -53,6 +67,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
+    authorize @project
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
@@ -64,7 +79,7 @@ class ProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     
     def set_project
-      @project = Project.find(params[:id])
+      @project = current_user.projects.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

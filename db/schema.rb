@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_02_22_114050) do
     t.date "deadline"
     t.string "bug_type"
     t.string "status"
-    t.binary "screenshot"
+    t.string "image"
     t.index ["project_id"], name: "index_bugs_on_project_id"
     t.index ["user_id"], name: "index_bugs_on_user_id"
   end
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_02_22_114050) do
     t.string "title"
     t.text "content"
     t.datetime "created_at", null: false
-    t.datetime "updated_`at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "projects_users", id: false, force: :cascade do |t|

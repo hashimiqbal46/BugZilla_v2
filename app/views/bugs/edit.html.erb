@@ -1,25 +1,27 @@
-<h1>Editing Bug</h1>
+<div class="container">
+  <h1>Editing Bug</h1>
 
-<%= form_for(@bug, url: {action: "update"}) do |form| %>
-  <%= form.label :user_id %>
-  <%= form.text_field :user_id  %>
+  <%= form_for(@bug, url: {action: "update"}) do |form| %>
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id  %>
 
-  <%= form.label :title %>
-  <%= form.text_field :title %>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
 
-  <%= form.label :deadline %>
-  <%= form.date_field :deadline %>
+    <%= form.label :deadline %>
+    <%= form.date_field :deadline %>
 
-  <%= form.label :bug_type %>
-  <%= form.text_field :bug_type %>
+    <%= form.label :bug_type %>
+    <%= form.text_field :bug_type %>
 
-  <%= form.label :status %>
-  <%= form.text_field :status %>
+    <%= form.label :status %>
+    <%= form.text_field :status %>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
 
-<%= link_to 'Show', project_bug_path %> |
-<%= link_to 'Back', project_bugs_path %>
+  <%= link_to 'Show', project_bug_path %> |
+  <%= link_to 'Back', project_bugs_path %>
+</div>  
