@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy,:project_users,:project_add_user,:project_remove_user]
 
   # GET /projects
   # GET /projects.json
@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    authorize @project
+    # authorize @project
   end
 
   # GET /projects/new
@@ -31,16 +31,11 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
-    puts "----" * 123
-    puts @project.inspect
-    puts "=-----=" * 100
+    current_user.project << @project
     authorize @project
     respond_to do |format|
-      if @project.save
-        ProjectsUser.create(project_id: @project.id, user_id: current_user.id)
-        puts "--111--" * 123
-        puts @project.inspect
-        puts "=---1111--=" * 100
+      if @project.save!
+        puts "2"*100
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -60,7 +55,7 @@ class ProjectsController < ApplicationController
       else
         format.html { render :edit }
         format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+      end 
     end
   end
 
@@ -73,6 +68,24 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def project_users
+    @Accepts_users = @project.users.all
+    @All_users = User.all
+    @reject = @All_users - @Accepts_users
+  end
+
+  def project_add_user
+    @user = User.find(params[:user])
+    @user.projects   << @project
+    redirect_to project_users_project_path(@project)
+  end
+
+  def project_remove_user
+    @user = User.find(params[:user])
+    @user.projects.delete(@project)
+    redirect_to project_users_project_path(@project)
   end
 
   private

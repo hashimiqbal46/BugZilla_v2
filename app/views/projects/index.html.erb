@@ -18,7 +18,7 @@
     </div>
     <div class="float-right">
       <% if current_user.user_type == "manager" %>
-        <td><%= link_to button_tag('Users'),user_admin_index_path %></td>
+        <td><%= link_to button_tag('Users'),project_users_project_path(project) %></td>
         <td><%= link_to button_tag('Edit'), edit_project_path(project) %></td>
         <td><%= link_to button_tag('Delete'), project, method: :delete, data: { confirm: 'Are you sure?' } %></td><br><br>
       <% end %>
@@ -44,9 +44,8 @@
               <td><%=bug.status %></td>
               <td><%=bug.deadline %></td>
               <td><%= image_tag bug.image_url.to_s %></td>
-              <td><%= link_to button_tag('Edit'), edit_project_bug_path(bug.project.id, bug.id) %></td>
-              <% if current_user.user_type != "developer" %>
-                <td><%= link_to button_tag('Delete'), project_bug_path(bug.project.id, bug.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% if current_user.user_type == "developer" %>
+                <td><%= link_to button_tag('Edit'), edit_project_bug_path(bug.project.id, bug.id) %></td>
               <% end %>
             </tr>
           <% end %>
