@@ -1,87 +1,30 @@
 <p id="notice"><%= notice %></p>
 <div class="container border">
-<h1>Projects</h1>
+<h1><b>Projects</b></h1>
 <% if current_user.user_type == "manager" %>
-  <%= link_to button_tag('New Project'), new_project_path %>
+  <%= link_to button_tag('New Project', :class => "btn btn-primary"), new_project_path %>
 <% end %>
 <br><br>
-<%= will_paginate @projects, render: BootstrapPagination::Rails, previous_label: "Old",next_label: "Next", inner_window: 1, outer_window: 0 %>
   <% @projects.each do |project| %>
+    <div class= "container border bg-secondary bg-light">
 
-    <div class="inline-text">  
-      <b>Title:</b>
-      <p><%= project.title %></p>
-    </div><br>
-    <div class="inline-text"> 
-      <b>Content:</b>
-      <p class="text-dark"><%= link_to project.content,project %></p>
-    </div>
-    <div class="float-right">
+      <div class="inline-text">  
+        <font size="+1"><b>Title:</b></font>
+        <%= project.title %>
+      </div><br>
+      <div class="inline-text"> 
+        <h3><b>Description:</b></h3>
+        <p><%= project.content %></p>
+      </div>
+      <div class="float-right">
+      <td><%= link_to button_tag('show',:class => "btn btn-success"), project_path(project) %></td>
       <% if current_user.user_type == "manager" %>
-        <td><%= link_to button_tag('Users'),project_users_project_path(project) %></td>
-        <td><%= link_to button_tag('Edit'), edit_project_path(project) %></td>
-        <td><%= link_to button_tag('Delete'), project, method: :delete, data: { confirm: 'Are you sure?' } %></td><br><br>
+        <td><%= link_to button_tag('Edit',:class => "btn btn-warning"), edit_project_path(project) %></td>
+        <td><%= link_to button_tag('Delete',:class => "btn btn-danger"), project, method: :delete, data: { confirm: 'Are you sure?' } %></td><br><br>
       <% end %>
+       <br><br>
     </div>
-    <table class="table table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th>Title</th>
-          <th>Type</th>
-          <th>Status</th>
-          <th>Deadline</th>
-          <th>Assignment</th>
-          <th>Resolved</th>
-          <th>Screenshot</th>
-          <th colspan="2"></th>
-        </tr>
-      </thead>
-
-      <tbody data-spy="scroll" data-target="#myScrollspy" data-offset="1">
-        <div id = "myScrollspy">
-          <% project.bugs.each do |bug| %>
-            <tr>
-              <td><%=bug.title %></td>
-              <td><%=bug.bug_type %></td>
-              <td><%=bug.status %></td>
-              <td><%=bug.deadline %></td>
-              <% if current_user.user_type=="developer" %>
-                <% if bug.Assigned.nil? %>
-                  <td><%=link_to button_tag("Assign"),assign_user_project_bug_path(bug.project.id,bug.id ) %></td>
-                <% else %>
-                  <td><%= User.find(bug.Assigned).name %>(<%= User.find(bug.Assigned).email %>)</td>
-                  <% if bug.status == "started" %>
-                    <td><%= link_to button_tag('Resolved?'),bug_resolve_project_bug_path(bug.project.id,bug.id) %></td>
-                  <% else %>
-                    <td><%= bug.bug_type %> is <%= bug.status %></td>
-                  <% end %>
-                <% end %>
-              <% else %>
-                  <% if bug.Assigned.nil? %>
-                    <td>Not Assigned</td>
-                    <td>Not Resolved</td>
-                  <% else %>
-                    <td><%= User.find(bug.Assigned).name %>(<%= User.find(bug.Assigned).email %>)</td>
-                    <td><%= bug.bug_type %> is <%= bug.status %></td>
-                  <% end%>
-              <% end %>
-              <td><%= image_tag(bug.image_url, alt: 'Image', class: "img-fluid") if bug.image? %></td>
-            </tr>
-          <% end %>
-          <% if current_user.user_type == "qa" %>
-            <tr>
-              <td><%= link_to button_tag("Report Bug"),new_project_bug_path(project) %></td>
-            </tr>
-          <% end %>
-        </div>
-      </tbody>
-    </table>
-
-
-        
-  <% end %>    
-
-<br>
-
-
+    </div>   
+    <br>    
+  <% end %>
 </div>

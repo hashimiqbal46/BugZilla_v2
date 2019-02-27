@@ -1,6 +1,45 @@
-<div class="container">
-	<p id="notice"><%= notice %></p>
-
-	<%= link_to 'Edit', edit_bug_path(@bug) %> |
-	<%= link_to 'Back', bugs_path %>
+<p id="notice"><%= notice %></p>
+<div class = "container border">
+    <p><h3><b>Title</b></h3></p>
+    <p><%= @bug.title %></p>
+    <p><h3><b>Description</b></h3></p>
+    <p><%= @bug.Description %></p>
+    <p><h3><b>Type</b></h3></p>
+    <p><%= @bug.bug_type %></p>
+    <p><h3><b>Status</b></h3></p>
+    <p><%= @bug.status %></p>
+    <p><h3><b>Deadline</b></h3></p>
+    <p><%= @bug.deadline %></p>
+    <p><h3><b>Assignment</b></h3></p>
+    <% if current_user.user_type=="developer" %>
+        <% if !@bug.Assigned? %>
+            <%=link_to button_tag("Assign",:class => "btn btn-warning" ),assign_user_project_bug_path(@bug.project.id,@bug.id ) %>
+        <% else %>
+            <%= User.find(@bug.Assigned).name %>(<%= User.find(@bug.Assigned).email %>)
+            <% if @bug.status == "started" %>
+            	<% if @bug.bug_type == "feature" %>
+            		<pre><%= link_to button_tag('Completed', :class => "btn btn-success"),bug_resolve_project_bug_path(@bug.project.id,@bug.id) %></pre>
+            	<% else %>
+                	<pre><%= link_to button_tag('Resolved', :class => "btn btn-success"),bug_resolve_project_bug_path(@bug.project.id,@bug.id) %></pre>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% else %>
+        <% if @bug.Assigned? %>
+           <%= User.find(@bug.Assigned).name %>(<%= User.find(@bug.Assigned).email %>)
+        <% else %>
+            Not Assigned
+        <% end%>
+    <% end %>
+    <% if @bug.image? %>
+        <p><h3><b>Screenshot</b></h3></p>
+        <%= image_tag(@bug.image_url, alt: 'Image', class: "img-fluid") if @bug.image? %><br><br>
+    <% end %>
+    <br>
+    <% if current_user.user_type == "qa" %>
+        <%= link_to button_tag('Edit', :class => 'btn btn-warning'),edit_project_bug_path(@bug.project.id,@bug.id) %>
+        <%= link_to button_tag('Delete', :class => 'btn btn-danger'),project_bug_path(@bug.project.id,@bug.id),method: :delete, data: {confirm: "Are Your sure!"} %><br><br>
+    <% end %>
+    
+    <%=link_to button_tag('Back', :class => 'btn btn-primary'), project_path(@bug.project.id) %> <br><br>
 </div>

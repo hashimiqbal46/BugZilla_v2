@@ -1,11 +1,11 @@
 <div class="container" > 
   <table class="table table-hover">
 
-  	<thead class="thead-light">
+  	<thead class="thead-dark">
   	<tr>
   		<th>Name</th>
   		<th>Email</th>
-  		<th>User_Type</th>
+  		<th>Role</th>
   		<th colspan="1"></th>
       </tr>
       </thead>
@@ -17,37 +17,25 @@
                 <td><%=user.name %></td>
               	<td><%=user.email %></td>
                 <td><%=user.user_type %></td>
-                <% if user.user_type != "manager" %>
-                  <td><%=link_to button_tag('Remove'),project_remove_user_project_path(@project.id,:user => user.id) %></td>
+                <% if user.user_type != "manager" || user != current_user %>
+                  <td><%=link_to button_tag('Remove', :class => "btn btn-warning"),project_remove_user_project_path(@project.id,:user => user.id) %></td>
+                <% else %>
+                  <td><%=button_tag('Remove',disabled: true, :class => "btn btn-warning") %></td>
                 <% end %>
              	</tr>
          	<% end %>
-          </div>
-      </tbody>
-  </table>
-  <table class="table table-hover">
-    <thead class="thead-light">
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>User_Type</th>
-      <th colspan="1"></th>
-      </tr>
-      </thead>
 
-      <tbody data-spy="scroll" data-target="#myScrollspy" data-offset="1">
-          <div id = "myScrollspy">
           <% @reject.each do |user| %>
               <tr>
                 <td><%=user.name %></td>
                 <td><%=user.email %></td>
                 <td><%=user.user_type %></td>
-                <td><%= link_to button_tag('Add'),project_add_user_project_path(@project.id,:user =>user.id) %></td>
+                <td><%= link_to button_tag('Add', :class => "btn btn-success"),project_add_user_project_path(@project.id,:user =>user.id) %></td>
               </tr>
           <% end %>
+
           </div>
       </tbody>
   </table>
-<%= link_to button_tag('Back'), root_path %>
-</div>
 
+<%= link_to button_tag('Back', :class => "btn btn-primary"), project_path(@project) %>

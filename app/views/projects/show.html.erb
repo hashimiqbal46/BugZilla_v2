@@ -1,14 +1,68 @@
 <p id="notice"><%= notice %></p>
+<div class="container border">
+	<h1>Project</h1>
+	<br><br>
+  <div class= "container border bg-secondary bg-light">
+    <div class="inline-text">  
+      <font size="+1"><b>Title:</b></font>
+      <%= @project.title %>
+    </div><br>
+    <div class="inline-text"> 
+      <h3><b>Description:</b></h3>
+      <p><%=@project.content %></p>
+    </div>
+    <div class="float-right">
+      <% if current_user.user_type == "manager" %>
+        <td><%= link_to button_tag('Users',:class => "btn btn-success"),project_users_project_path(@project) %></td>
+        <td><%= link_to button_tag('Edit',:class => "btn btn-warning"), edit_project_path(@project) %></td>
+        <td><%= link_to button_tag('Delete',:class => "btn btn-danger"), @project, method: :delete, data: { confirm: 'Are you sure?' } %></td><br><br>
+      <% end %>
+    </div>
+  </div><br>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th>Title</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Deadline</th>
+          <th>Assignment</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
 
-<p>
-  <strong>Title:</strong>
-  <%= @project.title %>
-</p>
+      <tbody >
+        <div >
+          <% @project.bugs.each do |bug| %>
+            <tr>
+              <td><%= link_to bug.title,project_bug_path(bug.project.id,bug.id) %></td>
+              <td><%=bug.bug_type %></td>
+              <td><%=bug.status %></td>
+              <td><%=bug.deadline %></td>
+              <% if current_user.user_type=="developer" %>
+                <% if bug.Assigned.nil? %>
+                  <td><%=link_to button_tag("Assign", :class => "btn btn-warning"),assign_user_project_bug_path(bug.project.id,bug.id ) %></td>
+                <% else %>
+                  <td><%= User.find(bug.Assigned).name %>(<%= User.find(bug.Assigned).email %>)</td>
+                <% end %>
+              <% else %>
+                <% if bug.Assigned.nil? %>
+                  <td>Not Assigned</td>
+                <% else %>
+                  <td><%= User.find(bug.Assigned).name %>(<%= User.find(bug.Assigned).email %>)</td>
+                <% end%>
+              <% end %>
+            </tr>
+          <% end %>
+          <% if current_user.user_type == "qa" %>
+            <tr>
+              <td><%= link_to button_tag("Report Bug",:class => "btn btn-secondary"),new_project_bug_path(@project) %></td>
+            </tr>
+          <% end %>
+        </div>
+      </tbody>
+    </table>        
 
-<p>
-  <strong>Content:</strong>
-  <%= @project.content %>
-</p>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+    <br><br>
+    <%= link_to button_tag('Back', :class => "btn btn-primary"), projects_path %><br><br>
+</div>

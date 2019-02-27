@@ -26,10 +26,6 @@ a {
     color: #666;
   }
 
-  &:hover {
-    color: #fff;
-    background-color: #000;
-  }
 }
 
 th {
@@ -52,7 +48,6 @@ div {
 
 .field_with_errors {
   padding: 2px;
-  background-color: red;
   display: table;
 }
 

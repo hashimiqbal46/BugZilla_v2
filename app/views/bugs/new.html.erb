@@ -15,25 +15,25 @@
   		<% end %>
 
   		<%= form.label :title %>
-  		<%= form.text_field :title %><br>
+  		<%= form.text_field :title , :class => "form-control"%><br>
 
       <%= form.label :Description %>
-      <%= form.text_area :Description %><br>
+      <%= form.text_area :Description, :class => "form-control" %><br>
 
 
   		<%= form.label :deadline %>
-  		<%= form.date_field :deadline %><br>
+  		<%= form.date_field :deadline, :class => "form-control"  %><br>
 
-  		<%= form.label :bug_type %>
-  		<%= form.text_field :bug_type %><br><br>
-
-  		<%= form.file_field :image %><br><br>
+      <div class="list-group list-group-horizontal">
+  		<%= form.select :bug_type, "<option value=Bug>Bug</option><option value=Feature>Feature</option></select>".html_safe  %><br><br>
+      </div><br>
+  		<%= form.file_field :image %><br>
 
   		<div class="actions">
-    		<%= form.submit %>
+    		<%= form.submit :class => "btn btn-primary" %>
   		</div>
 	<% end %>
 
 
-	<%= link_to button_tag('Back'), projects_path %>
+	<%= link_to button_tag('Back', :class=>"btn btn-primary"), projects_path %>
 </div>
