@@ -28,6 +28,7 @@ class BugsController < ApplicationController
   # POST /bugs.json
   def create
     @bug = Project.find(params[:project_id]).bugs.new(bug_params)
+    @bug.user_id = current_user.id
     @bug.status = "new"
     authorize @bug
     if @bug.save
@@ -86,6 +87,6 @@ class BugsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through
 
     def bug_params
-      params.require(:bug).permit(:title,:deadline,:type,:status,:user_id,:project_id,:bug_type)
+      params.require(:bug).permit(:title,:deadline,:type,:status,:user_id,:project_id,:bug_type,:image)
     end
 end

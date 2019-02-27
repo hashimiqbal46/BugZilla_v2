@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_02_26_132826) do
     t.string "status"
     t.string "image"
     t.integer "Assigned"
+    t.text "Description"
     t.index ["project_id"], name: "index_bugs_on_project_id"
     t.index ["user_id"], name: "index_bugs_on_user_id"
   end

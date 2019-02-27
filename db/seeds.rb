@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-	User.create(email: "hashim.iqbal@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Hashim Iqbal")
-	User.create(email: "hashimrajput13@devsinc.com", password: "hashimiqbal", user_type: "manager", name: "Hashim")
-
-
-	Project.create(title: "first Project", content: "This is my first Project")
-
-	Project.first.bugs.create(title: "Feature Bug",bug_type: "Bug",status: "new",user_id: 1)
+	User.create(email: "developer@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Developer")
+	User.create(email: "manager@devsinc.com", password: "hashimiqbal", user_type: "manager", name: "Manager")
+	User.create(email: "qa@devsinc.com", password: "hashimiqbal", user_type: "qa", name: "Quality")
+	User.create(email: "developer1@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Developer 1")
+	User.create(email: "developer2@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Developer 2")
+	User.create(email: "developer3@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Developer 3")
+	User.create(email: "developer4@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Developer 4")

@@ -2,17 +2,15 @@
   <h1>Editing Bug</h1>
 
   <%= form_for(@bug, url: {action: "update"}) do |form| %>
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id  %>
 
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title %><br>
 
     <%= form.label :deadline %>
-    <%= form.date_field :deadline %>
+    <%= form.date_field :deadline %><br>
 
     <%= form.label :bug_type %>
-    <%= form.text_field :bug_type %>
+    <%= form.text_field :bug_type %><br>
 
     <%= form.label :status %>
     <%= form.text_field :status %>

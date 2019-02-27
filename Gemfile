@@ -7,6 +7,8 @@ gem 'devise'
 gem 'pundit'
 gem 'carrierwave'
 gem 'will_paginate-bootstrap'
+gem "rmagick"
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'

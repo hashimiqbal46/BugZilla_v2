@@ -20,7 +20,7 @@
           <td><%=bug.bug_type %></td>
           <td><%=bug.status %></td>
           <td><%=bug.deadline %></td>
-          <td><%= bug.image %></td>
+          <td><%= bug.image.url.to_s %></td>
 
         </tr>
       <% end %>

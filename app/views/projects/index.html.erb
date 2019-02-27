@@ -56,7 +56,6 @@
                     <td><%= bug.bug_type %> is <%= bug.status %></td>
                   <% end %>
                 <% end %>
-                <td><%= image_tag bug.image_url.to_s %></td>
               <% else %>
                   <% if bug.Assigned.nil? %>
                     <td>Not Assigned</td>
@@ -66,6 +65,7 @@
                     <td><%= bug.bug_type %> is <%= bug.status %></td>
                   <% end%>
               <% end %>
+              <td><%= image_tag(bug.image_url, alt: 'Image', class: "img-fluid") if bug.image? %></td>
             </tr>
           <% end %>
           <% if current_user.user_type == "qa" %>
