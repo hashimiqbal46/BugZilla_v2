@@ -4,17 +4,13 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    if current_user.user_type == "qa"
-      @projects = Project.all.paginate(page: params[:page], per_page: 1)
-    else
-      @projects = current_user.projects.paginate(page: params[:page], per_page: 1)
-    end
+    @projects = current_user.projects.paginate(page: params[:page], per_page: 1)
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
-    # authorize @project
+     authorize @project
   end
 
   # GET /projects/new

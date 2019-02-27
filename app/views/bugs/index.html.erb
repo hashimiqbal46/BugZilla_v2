@@ -10,7 +10,6 @@
         <th>Status</th>
         <th>Deadline</th>
         <th>Screenshot</th>
-        <th colspan="2"></th>
       </tr>
     </thead>
 
@@ -21,9 +20,7 @@
           <td><%=bug.bug_type %></td>
           <td><%=bug.status %></td>
           <td><%=bug.deadline %></td>
-          <td><%= bug.screenshot %></td>
-          <td><%= link_to 'Edit', edit_project_bug_path(bug.project.id, bug.id) %></td>
-          <td><%= link_to 'Destroy', project_bug_path(bug.project.id, bug.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= bug.image %></td>
 
         </tr>
       <% end %>

@@ -12,8 +12,4 @@ class ProjectPolicy < ApplicationPolicy
 	def destroy?
 		user.user_type == "manager"
 	end 
-
-	def show?
-		true
-	end
 end

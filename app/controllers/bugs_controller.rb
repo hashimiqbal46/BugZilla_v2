@@ -1,5 +1,5 @@
 class BugsController < ApplicationController
-  before_action :set_bug, only: [:show, :edit, :update, :destroy]
+  before_action :set_bug, only: [:show, :edit, :update, :destroy,:assign_user,:bug_resolve]
   #before_action :set_project, all:
 
   # GET /bugs
@@ -28,6 +28,7 @@ class BugsController < ApplicationController
   # POST /bugs.json
   def create
     @bug = Project.find(params[:project_id]).bugs.new(bug_params)
+    @bug.status = "new"
     authorize @bug
     if @bug.save
       redirect_to projects_path, notice: 'Bug was successfully created.'
@@ -56,6 +57,25 @@ class BugsController < ApplicationController
     redirect_to projects_path, notice: 'Bug was successfully destroyed.'
   end
 
+
+  def assign_user
+    authorize @bug
+    @bug.update(Assigned: current_user.id, status: 'started')
+    redirect_to projects_path
+  end
+
+  def bug_resolve
+    authorize @bug
+    if @bug.bug_type == 'bug'
+      @bug.update(status: "Resolved")
+    else
+      @bug.update(status: "Completed")
+    end
+    redirect_to projects_path
+  end
+
+
+
   private
 
     # Use callbacks to share common setup or constraints between actions.
@@ -63,7 +83,8 @@ class BugsController < ApplicationController
       @bug = Project.find(params[:project_id]).bugs.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet, only allow the white list through
+
     def bug_params
       params.require(:bug).permit(:title,:deadline,:type,:status,:user_id,:project_id,:bug_type)
     end

@@ -2,7 +2,7 @@ class BugPolicy < ApplicationPolicy
 	
 
 	def edit?
-		user.user_type == "developer"
+		false
 	end
 
 	def create?
@@ -13,8 +13,12 @@ class BugPolicy < ApplicationPolicy
 		true
 	end
 
-	def destroy?
-		false
+	def assign_user?
+		user.user_type == "developer"
+	end
+
+	def bug_resolve?
+		user.user_type == "developer"
 	end
 
 end 

@@ -11,7 +11,7 @@
     </div>
   <% end %>
   <%= form.label :user_id %>
-  <%= form.text_field :user_id  %>
+  <%= form.text_field :user_id, autocomplete: current_user.id  %>
 
   <%= form.label :title %>
   <%= form.text_field :title %>
@@ -22,11 +22,7 @@
   <%= form.label :bug_type %>
   <%= form.text_field :bug_type %>
 
-  <%= form.label :status %>
-  <%= form.text_field :status %>
-
-  <%= form.file_field :image %>
-
+  <%= form.file_field :image %><br><br>
 
   <div class="actions">
     <%= form.submit %>

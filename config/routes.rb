@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 #  get 'user_admin/add_user'
   devise_for :users
   resources :projects do
-  	resources :bugs
+  	resources :bugs do
+      member do
+        get 'assign_user'
+        get 'bug_resolve'
+      end
+    end
   	member do 
   		get 'project_users'
   		get 'project_add_user'
