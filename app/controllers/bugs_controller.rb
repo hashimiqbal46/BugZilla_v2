@@ -32,7 +32,7 @@ class BugsController < ApplicationController
     @bug.status = "new"
     authorize @bug
     if @bug.save
-      redirect_to projects_path, notice: 'Bug was successfully created.'
+      redirect_to project_path(@bug.project.id), notice: 'Bug was successfully created.'
         
     else
       render 'new'
@@ -62,7 +62,7 @@ class BugsController < ApplicationController
   def assign_user
     authorize @bug
     @bug.update(Assigned: current_user.id, status: 'started')
-    redirect_to projects_path
+    redirect_to project_path(@bug.project.id)
   end
 
   def bug_resolve

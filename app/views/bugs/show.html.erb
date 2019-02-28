@@ -30,13 +30,14 @@
         <% else %>
             Not Assigned
         <% end%>
-    <% end %>
+    <% end %><br><br>
     <% if @bug.image? %>
         <p><h3><b>Screenshot</b></h3></p>
         <%= image_tag(@bug.image_url, alt: 'Image', class: "img-fluid") if @bug.image? %><br><br>
     <% end %>
-    <br>
+    <br><br><br>
     <% if current_user.user_type == "qa" %>
+
         <%= link_to button_tag('Edit', :class => 'btn btn-warning'),edit_project_bug_path(@bug.project.id,@bug.id) %>
         <%= link_to button_tag('Delete', :class => 'btn btn-danger'),project_bug_path(@bug.project.id,@bug.id),method: :delete, data: {confirm: "Are Your sure!"} %><br><br>
     <% end %>
