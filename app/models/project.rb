@@ -4,6 +4,8 @@ class Project < ApplicationRecord
 	has_many :users, through: :projects_users
 	has_many :bugs,		dependent: :destroy
 
+	validates :title, presence: true
+
 	# has_many :users, through: :projects_user
 
 	accepts_nested_attributes_for :bugs

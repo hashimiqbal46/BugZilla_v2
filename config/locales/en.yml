@@ -41,5 +41,15 @@ en:
   pundit:
     default: 'You cannot perform this action.'
     project_policy:
-     update?: 'You cannot edit this project!'
-     create?: 'You cannot create projects!'
+      show?: 'You cannot view this project!'
+      update?: 'You cannot edit this project!'
+      create?: 'You cannot create projects!'
+      project_remove_user?: 'You cannot remove user!'
+      project_add_user?: 'You cannot add user!'
+    bug_policy:
+      show?: 'You cannot view this user!'
+      update?: 'You cannot edit this bug!'
+      create?: 'You cannot create bug!'
+      destroy?: 'Your cannot destroy bug!'
+      assign_user?: 'You cannot assign user!'
+      bug_resolve?: 'You cannot resolve bug!'

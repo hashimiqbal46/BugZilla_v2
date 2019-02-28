@@ -29,29 +29,21 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     current_user.projects << @project
     authorize @project
-    respond_to do |format|
-      if @project.save!
-        puts "2"*100
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
-      else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.save!
+      puts "2"*100
+      redirect_to @project, notice: 'Project was successfully created.'
+    else
+      render :new 
     end
   end
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    respond_to do |format|
-      if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
-      else
-        format.html { render :edit }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end 
+    if @project.update(project_params)
+      redirect_to @project, notice: 'Project was successfully updated.'
+    else
+      render :edit 
     end
   end
 
@@ -60,10 +52,7 @@ class ProjectsController < ApplicationController
   def destroy
     authorize @project
     @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to projects_url, notice: 'Project was successfully destroyed.'
   end
 
   def project_users

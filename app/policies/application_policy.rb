@@ -7,6 +7,17 @@ class ApplicationPolicy
     @record = record
   end
 
+  def policy_name
+    self.class.to_s.underscore
+  end
+
+  def policy_error_message!(error_key=nil, &block)
+    error_key = block.call if block_given?
+    if error_key.present?
+      @policy_error_message = I18n.t("#{policy_name}.#{error_key}", scope: "pundit", default: :default)
+    end
+  end
+
   def index?
     false
   end

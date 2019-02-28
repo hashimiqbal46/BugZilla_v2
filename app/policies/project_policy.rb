@@ -12,4 +12,12 @@ class ProjectPolicy < ApplicationPolicy
 	def destroy?
 		user.user_type == "manager"
 	end 
+
+	def project_add_user?
+		user.user_type == "manager"
+	end
+
+	def project_remove_user?
+		user.user_type == "manager"
+	end
 end

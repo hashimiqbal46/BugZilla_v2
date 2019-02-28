@@ -5,4 +5,5 @@ class Bug < ApplicationRecord
 	mount_uploader :image, ImageUploader
 
 	validates :bug_type,:title, presence: true 
+	validates :title, uniqueness: true
 end

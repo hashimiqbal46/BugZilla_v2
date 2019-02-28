@@ -28,11 +28,11 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control" %>
     </div>
      <br> 
-    <div class="dropdown-menu list-group-horizontal">
+    <div class=" list-group-horizontal">
     <%= f.select :user_type,  "<option value=developer>Developer</option><option value=manager>Manager</option><option value=qa>Quality Assurance</option></select>".html_safe %>
-    </div>
+    </div><br>
     <div class="actions">
-      <%= f.submit "Sign up" %>
+      <%= f.submit "Sign up", :class => "btn btn-primary" %>
     </div>
   <% end %>
 
