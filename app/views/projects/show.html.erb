@@ -38,25 +38,27 @@
         <div >
           <% @project.bugs.each do |bug| %>
             <tr>
-              <td><%= link_to bug.title,project_bug_path(bug.project.id,bug.id) %></td>
-              <td><%=bug.bug_type %></td>
-              <td><%=bug.status %></td>
-              <td><%=bug.deadline %></td>
-              <% if current_user.user_type=="developer" %>
-                <% if bug.Assigned.nil? %>
-                  <td><%=link_to button_tag("Assign", :class => "btn btn-warning"),assign_user_project_bug_path(bug.project.id,bug.id ) %></td>
+              <div class = "center-text ">
+                <td><%= link_to bug.title,project_bug_path(bug.project.id,bug.id) %></td>
+                <td><%=bug.bug_type %></td>
+                <td><%=bug.status %></td>
+                <td><%=bug.deadline %></td>
+                <% if current_user.user_type=="developer" %>
+                  <% if bug.Assigned.nil? %>
+                    <td><%=link_to button_tag("Assign", :class => "btn btn-warning"),assign_user_project_bug_path(bug.project.id,bug.id ) %></td>
+                  <% else %>
+                    <td><%= User.find(bug.Assigned).name %></td>
+                  <% end %>
                 <% else %>
-                  <td><%= User.find(bug.Assigned).name %></td>
+                  <% if bug.Assigned.nil? %>
+                    <td>Not Assigned</td>
+                  <% else %>
+                    <td><%= User.find(bug.Assigned).name %></td>
+                  <% end%>
+                </div>
                 <% end %>
-              <% else %>
-                <% if bug.Assigned.nil? %>
-                  <td>Not Assigned</td>
-                <% else %>
-                  <td><%= User.find(bug.Assigned).name %></td>
-                <% end%>
-              <% end %>
               <% if bug.image? %>
-                <td><%= image_tag(bug.image_url(:thumb), alt: 'Image', class: "img-fluid") if bug.image? %></td>
+                <td><%= image_tag(bug.image_url(:thumb), alt: 'Image', class: "img-fluid img-thumbnail small") if bug.image? %></td>
               <% else %>
                 <td>Screenshot is not available</td>
               <% end %>
