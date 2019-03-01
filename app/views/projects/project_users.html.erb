@@ -20,7 +20,7 @@
                 <% if user.user_type != "manager" || user != current_user %>
                   <td><%=link_to button_tag('Remove', :class => "btn btn-warning"),project_remove_user_project_path(@project.id,:user => user.id) %></td>
                 <% else %>
-                  <td><%=button_tag('Remove',disabled: true, :class => "btn btn-warning") %></td>
+                  <td><%=button_tag('Remove', :class => "btn btn-warning hidden") %></td>
                 <% end %>
              	</tr>
          	<% end %>

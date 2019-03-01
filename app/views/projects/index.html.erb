@@ -1,15 +1,16 @@
 <p id="notice"><%= notice %></p>
 <div class="container border">
-<h1><b>Projects</b></h1>
+  <br>
+<font size="+2"><b>Projects</b></font>
 <% if current_user.user_type == "manager" %>
-  <%= link_to button_tag('New Project', :class => "btn btn-primary"), new_project_path %>
+  <%= link_to button_tag('New Project', :class => "btn btn-primary float-right"), new_project_path %>
 <% end %>
 <br><br>
   <% @projects.each do |project| %>
     <div class= "container border bg-secondary bg-light">
 
       <div class="inline-text">  
-        <font size="+1"><b>Title:</b></font>
+        <b>Title:</b>
         <%= project.title %>
       </div><br>
       <div class="inline-text"> 
@@ -21,8 +22,7 @@
       <% if current_user.user_type == "manager" %>
         <td><%= link_to button_tag('Edit',:class => "btn btn-warning"), edit_project_path(project) %></td>
         <td><%= link_to button_tag('Delete',:class => "btn btn-danger"), project, method: :delete, data: { confirm: 'Are you sure?' } %></td><br><br>
-      <% end %>
-       <br><br>
+      <% end %> 
     </div>
     </div>   
     <br>    

@@ -3,9 +3,13 @@
 	<h1>Project</h1>
 	<br><br>
   <div class= "container border bg-secondary bg-light">
+    <br>
     <div class="inline-text">  
       <font size="+1"><b>Title:</b></font>
       <%= @project.title %>
+      <% if current_user.user_type == "manager" %>
+        <td><%= link_to button_tag('Users',:class => "btn btn-success float-right"),project_users_project_path(@project) %></td>
+      <% end %>
     </div><br>
     <div class="inline-text"> 
       <h3><b>Description:</b></h3>
@@ -13,7 +17,6 @@
     </div>
     <div class="float-right">
       <% if current_user.user_type == "manager" %>
-        <td><%= link_to button_tag('Users',:class => "btn btn-success"),project_users_project_path(@project) %></td>
         <td><%= link_to button_tag('Edit',:class => "btn btn-warning"), edit_project_path(@project) %></td>
         <td><%= link_to button_tag('Delete',:class => "btn btn-danger"), @project, method: :delete, data: { confirm: 'Are you sure?' } %></td><br><br>
       <% end %>
@@ -27,7 +30,7 @@
           <th>Status</th>
           <th>Deadline</th>
           <th>Assignment</th>
-          <th colspan="2"></th>
+          <th>Screenshot</th>
         </tr>
       </thead>
 
@@ -43,14 +46,19 @@
                 <% if bug.Assigned.nil? %>
                   <td><%=link_to button_tag("Assign", :class => "btn btn-warning"),assign_user_project_bug_path(bug.project.id,bug.id ) %></td>
                 <% else %>
-                  <td><%= User.find(bug.Assigned).name %>(<%= User.find(bug.Assigned).email %>)</td>
+                  <td><%= User.find(bug.Assigned).name %></td>
                 <% end %>
               <% else %>
                 <% if bug.Assigned.nil? %>
                   <td>Not Assigned</td>
                 <% else %>
-                  <td><%= User.find(bug.Assigned).name %>(<%= User.find(bug.Assigned).email %>)</td>
+                  <td><%= User.find(bug.Assigned).name %></td>
                 <% end%>
+              <% end %>
+              <% if bug.image? %>
+                <td><%= image_tag(bug.image_url(:thumb), alt: 'Image', class: "img-fluid") if bug.image? %></td>
+              <% else %>
+                <td>Screenshot is not available</td>
               <% end %>
             </tr>
           <% end %>
