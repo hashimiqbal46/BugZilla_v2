@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-	User.create(email: "developer@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Developer")
-	User.create(email: "manager@devsinc.com", password: "hashimiqbal", user_type: "manager", name: "Manager")
-	User.create(email: "qa@devsinc.com", password: "hashimiqbal", user_type: "qa", name: "Quality")
-	User.create(email: "developer1@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Developer 1")
-	User.create(email: "developer2@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Developer 2")
-	User.create(email: "developer3@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Developer 3")
-	User.create(email: "developer4@devsinc.com", password: "hashimiqbal", user_type: "developer", name: "Developer 4")
+	User.create(email: "developer@devsinc.com", password: "Punjab@123", user_type: "developer", name: "Developer")
+	User.create(email: "manager@devsinc.com", password: "Punjab@123", user_type: "manager", name: "Manager")
+	User.create(email: "qa@devsinc.com", password: "Punjab@123", user_type: "qa", name: "Quality")
+	User.create(email: "developer1@devsinc.com", password: "Punjab@123", user_type: "developer", name: "Developer 1")
+	User.create(email: "developer2@devsinc.com", password: "Punjab@123", user_type: "developer", name: "Developer 2")
+	User.create(email: "developer3@devsinc.com", password: "Punjab@123", user_type: "developer", name: "Developer 3")
+	User.create(email: "developer4@devsinc.com", password: "Punjab@123", user_type: "developer", name: "Developer 4")
