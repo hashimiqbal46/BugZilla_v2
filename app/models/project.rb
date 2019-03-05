@@ -6,12 +6,5 @@ class Project < ApplicationRecord
 
 	validates :title, presence: true
 
-	# has_many :users, through: :projects_user
-
 	accepts_nested_attributes_for :bugs
-	# before_create :authorize
-
-	# def authorize 
-	# 	authorize projects_user
-	# end
 end

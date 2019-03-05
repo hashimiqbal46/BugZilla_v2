@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
   
-
- # get 'user_admin/index'
-#  get 'user_admin/add_user'
   devise_for :users
   resources :projects do
   	resources :bugs do

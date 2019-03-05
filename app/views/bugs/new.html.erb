@@ -1,24 +1,24 @@
 <div class="container">
-	<h1>New Bug</h1>
+	<% if @bug.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
+
+          <ul>
+            <% @bug.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+  <h1>New Bug</h1>
 
 	<%= form_for(@bug, url: {action: "create"},:html => {:multipart => true}) do |form| %>
-  		<% if @bug.errors.any? %>
-    		<div id="error_explanation">
-      			<h2><%= pluralize(@bug.errors.count, "error") %> prohibited this bug from being saved:</h2>
-
-      		<ul>
-      			<% @bug.errors.full_messages.each do |message| %>
-        			<li><%= message %></li>
-      			<% end %>
-      		</ul>
-    		</div>
-  		<% end %>
 
   		<%= form.label :title %>
   		<%= form.text_field :title , :class => "form-control"%><br>
 
       <%= form.label :Description %>
-      <%= form.text_area :Description, :class => "form-control" %><br>
+      <%= form.text_area :Description, :class => "des" %><br>
 
 
   		<%= form.label :deadline %>

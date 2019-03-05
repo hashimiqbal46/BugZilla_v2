@@ -1,26 +1,26 @@
-<div class="container">
+<div class="container border">
   <h1>Editing Bug</h1>
 
-  <%= form_for(@bug, url: {action: "update"}) do |form| %>
+    <%= form_for(@bug, url: {action: "update"}) do |form| %>
 
-    <%= form.label :title %>
-    <%= form.text_field :title , :class => "form-control" %><br>
-  
-    <%= form.label :Description %>
-    <%= form.text_area :Description, :class => "form-control" %><br>
+      <%= form.label :title %>
+      <%= form.text_field :title , :class => "form-control" %><br>
+    
+      <%= form.label :Description %>
+      <%= form.text_area :Description, :class => "des" %><br>
 
-    <%= form.label :deadline %>
-    <%= form.date_field :deadline , :class => "form-control" %><br>
+      <%= form.label :deadline %>
+      <%= form.date_field :deadline , :class => "form-control" %><br>
 
-    <%= form.label :bug_type %>
-    <%= form.text_field :bug_type  , :class => "form-control"%><br>
+      <%= form.label :bug_type %>
+      <%= form.text_field :bug_type  , :class => "form-control"%><br>
 
-    <%= form.file_field :image %><br>
+      <%= form.file_field :image %><br>
 
-    <div class="actions">
-      <%= form.submit :class => "btn btn-primary"  %>
-    </div>
-  <% end %>
+      <div class="actions">
+        <%= form.submit :class => "btn btn-primary"  %>
+      </div>
+    <% end %>
 
-  <%= link_to button_tag('Back', :class => "btn btn-primary"), project_bug_path(@bug.project.id,@bug.id) %>
+  <%= link_to button_tag('Back', :class => "btn btn-primary"), project_bug_path(@bug.project.id,@bug.id) %> <br><br>
 </div>  

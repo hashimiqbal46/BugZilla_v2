@@ -32,8 +32,7 @@ class BugsController < ApplicationController
     @bug.status = "new"
     authorize @bug
     if @bug.save
-      redirect_to project_path(@bug.project.id), notice: 'Bug was successfully created.'
-        
+      redirect_to project_path(@bug.project.id), notice: 'Bug was successfully created.' 
     else
       render 'new'
     end
@@ -55,7 +54,7 @@ class BugsController < ApplicationController
   def destroy
     authorize @bug
     @bug.destroy
-    redirect_to projects_path, notice: 'Bug was successfully destroyed.'
+    redirect_to project_path(@bug.project.id), notice: 'Bug was successfully destroyed.'
   end
 
 
