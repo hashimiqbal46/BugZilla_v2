@@ -27,12 +27,6 @@ class BugsController < ApplicationController
   # POST /bugs
   # POST /bugs.json
   def create
-    puts "-----params are -----"
-    puts params.inspect
-    puts "-------" * 120
-    puts bug_params.inspect
-    puts "-----bug params are above---"
-
     @bug = Project.find(params[:project_id]).bugs.new(bug_params)
     @bug.user_id = current_user.id
     @bug.status = "new"
