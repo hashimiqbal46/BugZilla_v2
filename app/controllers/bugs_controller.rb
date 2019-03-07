@@ -66,11 +66,7 @@ class BugsController < ApplicationController
 
   def bug_resolve
     authorize @bug
-    if @bug.bug_type == 'bug'
-      @bug.update(status: "Resolved")
-    else
-      @bug.update(status: "Completed")
-    end
+    @bug.bug_type == 'bug'? @bug.update(status: "Resolved") : @bug.update(status: "Completed")
     redirect_to projects_path
   end
 
@@ -86,6 +82,6 @@ class BugsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through
 
     def bug_params
-      params.require(:bug).permit(:title,:deadline,:type,:status,:user_id,:project_id,:bug_type,:image,:Description)
+      params.require(:bug).permit(:title, :deadline, :type, :project_id, :bug_type, :image, :Description)
     end
 end

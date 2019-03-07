@@ -20,7 +20,7 @@
         <font size = "+1"><b>Type</b></font>
     </div>
     <div class = "col-sm-2">
-        <font size = "+1">'<%= @bug.bug_type %>'</font>
+        <font size = "+1"><%= @bug.bug_type %></font>
     </div>
     <div class = "col-sm-2">
         <font size="+1"><b>Status</b></font>
@@ -58,7 +58,7 @@
             <% end %>
         <% else %>
             <% if @bug.Assigned? %>
-               <%= User.find(@bug.Assigned).name %>
+               <font size = "+1">'<%= User.find(@bug.Assigned).name %>'</font>
             <% else %>
                 Not Assigned
             <% end%>
