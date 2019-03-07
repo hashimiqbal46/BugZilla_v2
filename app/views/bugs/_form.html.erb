@@ -9,8 +9,9 @@
       <%= form.label :deadline %>
       <%= form.date_field :deadline , :class => "form-control" %><br>
 
-      <%= form.label :bug_type %>
-      <%= form.text_field :bug_type  , :class => "form-control"%><br>
+      <div class=" list-group-horizontal ">
+      <%= form.select :bug_type,  "<option value=Feature>Feature</option><option value=Bug>Bug</option></select>".html_safe %>
+      </div><br>
 
       <%= form.file_field :image %><br>
 
