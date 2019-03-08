@@ -1,20 +1,22 @@
 <p id="notice"><%= notice %></p>
-<div class="container border">
+
+<div class="container border border-dark rounded">
   <br>
 <font size="+2"><b>Projects</b></font>
+<%= user_session %>
 <% if current_user.user_type == "manager" %>
   <%= link_to button_tag('New Project', :class => "btn btn-primary float-right"), new_project_path %>
 <% end %>
 <br><br>
   <% @projects.each do |project| %>
-    <div class= "container border bg-secondary bg-light">
+    <div class= "container border bg-secondary bg-light border-dark rounded">
 
       <div class="inline-text">  
-        <b>Title:</b>
-        <%= project.title %>
+        <font size="+1"><b>Title:</b></font>
+        <font size="+1"><%= project.title %></font> 
       </div><br>
       <div class="inline-text"> 
-        <h3><b>Description:</b></h3>
+        <font size="+1"><b>Description:</b></font>
         <p><%= project.content %></p>
       </div>
       <div class="float-right">

@@ -1,18 +1,18 @@
 <p id="notice"><%= notice %></p>
-<div class="container border">
-	<h1>Project</h1>
+<div class="container border border-dark rounded">
+	<h1><b>Project</b></h1>
 	<br>
-  <div class= "container border bg-secondary bg-light sticky-top">
+  <div class= "container border bg-secondary bg-light ">
     <br>
     <div class="inline-text">  
       <font size="+1"><b>Title:</b></font>
-      <%= @project.title %>
+      <font size="+1"><%= @project.title %></font>
       <% if current_user.user_type == "manager" %>
         <td><%= link_to button_tag('Users',:class => "btn btn-success float-right"),project_users_project_path(@project) %></td>
       <% end %>
     </div><br>
     <div class="inline-text"> 
-      <h3><b>Description:</b></h3>
+      <font size="+1"><b>Description:</b></font>
       <p><%=@project.content %></p>
     </div>
     <div class="float-right">
@@ -22,7 +22,8 @@
       <% end %>
     </div>
   </div><br>
-    <table class="table table-hover">
+  
+    <table class="table table-hover table-bordered bg-secondary bg-light">
       <thead class="thead-dark">
         <tr>
           <th>Title</th>
@@ -34,45 +35,48 @@
         </tr>
       </thead>
 
-      <tbody >
-        <div >
-          <% @project.bugs.each do |bug| %>
-            <tr>
-              <div class = "center-text ">
-                <td><%= link_to bug.title,project_bug_path(bug.project.id,bug.id) %></td>
-                <td><%=bug.bug_type %></td>
-                <td><%=bug.status %></td>
-                <td><%=bug.deadline %></td>
-                <% if current_user.user_type=="developer" %>
-                  <% if bug.Assigned.nil? %>
-                    <td><%=link_to button_tag("Assign", :class => "btn btn-warning"),assign_user_project_bug_path(bug.project.id,bug.id ) %></td>
+      <tbody >  
+        <div > 
+              <% @project.bugs.each do |bug| %>
+                <tr>
+                  <div class = "center-text ">
+                    <td><%= link_to bug.title,project_bug_path(bug.project.id,bug.id) %></td>
+                    <td><%=bug.bug_type %></td>
+                    <td><%=bug.status %></td>
+                    <td><%=bug.deadline %></td>
+                    <% if current_user.user_type=="developer" %>
+                      <% if bug.Assigned.nil? %>
+                        <td><%=link_to button_tag("Assign", :class => "btn btn-warning"),assign_user_project_bug_path(bug.project.id,bug.id ) %></td>
+                      <% else %>
+                        <td><%= User.find(bug.Assigned).name %></td>
+                      <% end %>
+                    <% else %>
+                      <% if bug.Assigned.nil? %>
+                        <td>Not Assigned</td>
+                      <% else %>
+                        <td><%= User.find(bug.Assigned).name %></td>
+                      <% end%>
+                    <% end %>
+                  </div>
+                  <% if bug.image? %>
+                    <td><%= image_tag(bug.image_url(:thumb), alt: 'Image', class: "img-fluid img-thumbnail small") if bug.image? %></td>
                   <% else %>
-                    <td><%= User.find(bug.Assigned).name %></td>
+                    <td>Screenshot is not available</td>
                   <% end %>
-                <% else %>
-                  <% if bug.Assigned.nil? %>
-                    <td>Not Assigned</td>
-                  <% else %>
-                    <td><%= User.find(bug.Assigned).name %></td>
-                  <% end%>
-                </div>
-                <% end %>
-              <% if bug.image? %>
-                <td><%= image_tag(bug.image_url(:thumb), alt: 'Image', class: "img-fluid img-thumbnail small") if bug.image? %></td>
-              <% else %>
-                <td>Screenshot is not available</td>
+                </tr>
               <% end %>
-            </tr>
-          <% end %>
-          <% if current_user.user_type == "qa" %>
-            <tr>
-              <td><%= link_to button_tag("Report Bug",:class => "btn btn-secondary"),new_project_bug_path(@project) %></td>
-            </tr>
-          <% end %>
+            <% if current_user.user_type == "qa" %>
+              <tr>
+                <td><%= link_to button_tag("Report Bug",:class => "btn btn-secondary"),new_project_bug_path(@project) %></td>
+              </tr>
+
+            <% end %>          
         </div>
       </tbody>
-    </table>        
-
+    </table> 
+    <% if !@project.bugs.any? %>
+      <p class="center-text"> There are no bugs </p>
+    <% end %>       
     <br><br>
     <%= link_to button_tag('Back', :class => "btn btn-primary"), projects_path %><br><br>
 </div>

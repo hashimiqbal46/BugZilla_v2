@@ -32,7 +32,7 @@ class BugsController < ApplicationController
     @bug.status = "new"
     authorize @bug
     if @bug.save
-      redirect_to project_path(@bug.project.id), notice: 'Bug was successfully created.' 
+      redirect_to project_path(@bug.project.id), notice: I18n.t('flash.actions.bug.create.notice')
     else
       render 'new'
     end
@@ -42,11 +42,10 @@ class BugsController < ApplicationController
   # PATCH/PUT /bugs/1.json
   def update
     if @bug.update(bug_params)
-      redirect_to projects_path, notice: 'Bug was successfully updated.' 
+      redirect_to projects_path, notice: I18n.t('flash.actions.bug.update.notice')
     else
       render :edit 
     end
-    
   end
 
   # DELETE /bugs/1
@@ -54,9 +53,8 @@ class BugsController < ApplicationController
   def destroy
     authorize @bug
     @bug.destroy
-    redirect_to project_path(@bug.project.id), notice: 'Bug was successfully destroyed.'
+    redirect_to project_path(@bug.project.id), notice: I18n.t('flash.actions.bug.destroy.notice')
   end
-
 
   def assign_user
     authorize @bug
@@ -70,8 +68,6 @@ class BugsController < ApplicationController
     redirect_to projects_path
   end
 
-
-
   private
 
     # Use callbacks to share common setup or constraints between actions.
@@ -80,7 +76,6 @@ class BugsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through
-
     def bug_params
       params.require(:bug).permit(:title, :deadline, :type, :project_id, :bug_type, :image, :Description)
     end

@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   validate :password_complexity
   validates :name,:email, presence: true
+  validates :email, uniqueness: true
 
   accepts_nested_attributes_for :projects
   # Include default devise modules. Others available are:

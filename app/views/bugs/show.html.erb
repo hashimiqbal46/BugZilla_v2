@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
-<div class = "container border">
+<div class = "container border border-dark rounded">
     <br>
     <div class = "col-md">
         <font size ="+1"><b>Title: </b></font>
-        <%= @bug.title %>
+        <font size="+1"><%= @bug.title %></font>s
     </div>
     <div class = "col-sm-6 ">
         <p><h3><b>Description</b></h3></p>
@@ -13,7 +13,7 @@
         <% if @bug.image? %>
             <%= image_tag(@bug.image_url(:thumb), class: "img-fluid float-right img-thumbnail") if @bug.image? %>
         <% else %>
-            <b>Image is not available</b>
+            <font size="+1"><b>Image is not available</b></font>
         <% end %>
     </div>
     <div class = "col-sm-2">
@@ -60,7 +60,7 @@
             <% if @bug.Assigned? %>
                <font size = "+1">'<%= User.find(@bug.Assigned).name %>'</font>
             <% else %>
-                Not Assigned
+                <font size="+1">Not Assigned</font>
             <% end%>
         <% end %><br><br>
     </div>

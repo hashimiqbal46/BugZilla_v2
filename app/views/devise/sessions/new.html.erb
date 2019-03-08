@@ -2,10 +2,11 @@
   <div class="d-flex justify-content-center h-100">
     <div class=" form-login">
       <div class="card-header">
-        <h3>Log in </h3>
+        <font size="+1"> <b>Log in </b></font>
       </div>
       <div class="card-body">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
           <div class="form-group">
             <label for="email" class="mr-sm-2">Email:</label>
             <div class="input-group form-group">          

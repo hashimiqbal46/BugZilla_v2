@@ -30,14 +30,29 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-  views:
-    pagination:
-      first: ""
-      last: ""
-      next: "Next"
-      previous: "Prev"
-      truncate: "..."
+  flash:
+    actions:
+      project:  
+        create:
+          notice: "Project was successfully created."
+        update:
+          notice: "Project was successfully updated."
+        destroy:
+          notice: "Project was successfully destroyed."
+          alert: "Project could not be destroyed."
+        assign:
+          notice: 'User has been assigned to this project'
+        remove:
+          notice: 'User has been removed from this project'
+
+      bug:
+        create:
+          notice: 'Bug was successfully created.' 
+        update:
+          notice: 'Bug was successfully updated.' 
+        destroy:
+          notice: 'Bug was successfully destroyed.'
+
   pundit:
     default: 'You cannot perform this action.'
     project_policy:
