@@ -61,7 +61,7 @@ end
 
 group :development, :production do
   gem 'carrierwave'
-  gem 'rmagick'
+  gem 'rmagick', '>= 5.3.0'
 end
 
 group :test do
