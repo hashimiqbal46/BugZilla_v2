@@ -5,7 +5,7 @@ ruby '2.5.1'
 
 gem 'devise'
 gem 'pundit'
-gem 'carrierwave'
+gem 'carrierwave', '>= 2.2.5'
 #gem 'will_paginate-bootstrap'
 #gem "mini_magick"
 #gem 'responders'
@@ -60,7 +60,7 @@ end
 
 
 group :development, :production do
-  gem 'carrierwave'
+  gem 'carrierwave', '>= 2.2.5'
   gem 'rmagick'
 end
 
